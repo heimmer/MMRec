@@ -145,8 +145,8 @@ class Trainer(AbstractTrainer):
         loss_func = loss_func or self.model.calculate_loss
         total_loss = None
         loss_batches = []
-        epoch_iterator = tqdm(train_data)
-        for batch_idx, interaction in enumerate(epoch_iterator):
+        # epoch_iterator = tqdm(train_data)
+        for batch_idx, interaction in tqdm(enumerate(train_data),total =len(train_data)):
             self.optimizer.zero_grad()
             losses = loss_func(interaction)
             if isinstance(losses, tuple):

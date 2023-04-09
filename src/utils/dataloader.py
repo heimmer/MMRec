@@ -34,8 +34,8 @@ class AbstractDataLoader(object):
         step (int): The increment of :attr:`pr` for each batch.
         batch_size (int): The max interaction number for all batch.
     """
-    def __init__(self, config, dataset, additional_dataset=None,
-                 batch_size=1, neg_sampling=False, shuffle=False):
+    def __init__(self, config, dataset, batch_size, additional_dataset=None,
+                  neg_sampling=False, shuffle=False):
         self.config = config
         self.logger = getLogger()
         self.dataset = dataset
@@ -47,7 +47,7 @@ class AbstractDataLoader(object):
         #     pass
         self.additional_dataset = additional_dataset
         self.batch_size = batch_size
-        self.step = 1
+        self.step = 10
         self.shuffle = shuffle
         self.neg_sampling = neg_sampling
         self.device = config['device']
@@ -106,7 +106,7 @@ class TrainDataLoader(AbstractDataLoader):
     """
     General dataloader with negative sampling.
     """
-    def __init__(self, config, dataset, batch_size=1, shuffle=False):
+    def __init__(self, config, dataset, batch_size, shuffle=False):
         super().__init__(config, dataset, additional_dataset=None,
                          batch_size=batch_size, neg_sampling=True, shuffle=shuffle)
 
@@ -331,8 +331,8 @@ class EvalDataLoader(AbstractDataLoader):
     """
         additional_dataset: training dataset in evaluation
     """
-    def __init__(self, config, dataset, additional_dataset=None,
-                 batch_size=1, shuffle=False):
+    def __init__(self, config, dataset, batch_size, additional_dataset=None,
+                  shuffle=False):
         super().__init__(config, dataset, additional_dataset=additional_dataset,
                          batch_size=batch_size, neg_sampling=False, shuffle=shuffle)
 
