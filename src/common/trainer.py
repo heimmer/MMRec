@@ -19,6 +19,8 @@ from logging import getLogger
 from utils.utils import get_local_time, early_stopping, dict2str
 from utils.topk_evaluator import TopKEvaluator
 
+from tqdm.auto import tqdm
+
 
 class AbstractTrainer(object):
     r"""Trainer Class is used to manage the training and evaluation processes of recommender system models.
@@ -143,7 +145,8 @@ class Trainer(AbstractTrainer):
         loss_func = loss_func or self.model.calculate_loss
         total_loss = None
         loss_batches = []
-        for batch_idx, interaction in enumerate(train_data):
+        epoch_iterator = tqdm(train_data)
+        for batch_idx, interaction in enumerate(epoch_iterator):
             self.optimizer.zero_grad()
             losses = loss_func(interaction)
             if isinstance(losses, tuple):

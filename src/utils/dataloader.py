@@ -47,7 +47,7 @@ class AbstractDataLoader(object):
         #     pass
         self.additional_dataset = additional_dataset
         self.batch_size = batch_size
-        self.step = batch_size
+        self.step = 1
         self.shuffle = shuffle
         self.neg_sampling = neg_sampling
         self.device = config['device']
