@@ -275,7 +275,7 @@ class Trainer(AbstractTrainer):
 
         # batch full users
         batch_matrix_list = []
-        for batch_idx, batched_data in enumerate(eval_data):
+        for batch_idx, batched_data in tqdm(enumerate(eval_data),total =len(eval_data)):
             # predict: interaction without item ids
             scores = self.model.full_sort_predict(batched_data)
             masked_items = batched_data[1]

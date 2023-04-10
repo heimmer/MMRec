@@ -44,13 +44,13 @@ def gen_user_matrix(all_edge, no_users):
 
 if __name__ == 	'__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', '-d', type=str, default='baby', help='name of dataset')
+    parser.add_argument('--dataset', '-d', type=str, default='clothing', help='name of dataset')
     args = parser.parse_args()
     dataset_name = args.dataset
     print(f'Generating u-u matrix for {dataset_name} ...\n')
 
     config = {}
-    os.chdir('../zh-src')
+    os.chdir('../src')#原先是zh-src
     cur_dir = os.getcwd()
     con_dir = os.path.join(cur_dir, 'configs') # get config dir
     overall_config_file = os.path.join(con_dir, "overall.yaml")
